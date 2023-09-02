@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>こども食堂マップ</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <style>
+        #map {
+            height: 800px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+曜日: 
+<input type="checkbox" id="day_sun" value="日" checked>日
+<input type="checkbox" id="day_mon" value="月" checked>月
+<input type="checkbox" id="day_mon" value="火" checked>火
+<input type="checkbox" id="day_mon" value="水" checked>水
+<input type="checkbox" id="day_mon" value="木" checked>木
+<input type="checkbox" id="day_mon" value="金" checked>金
+<input type="checkbox" id="day_mon" value="土" checked>土
+<!-- 以下、火水木金土も同様に追加 -->
+
+時間:
+<input type="checkbox" id="time_morning" value="朝" checked>朝
+<input type="checkbox" id="time_afternoon" value="昼" checked>昼
+<input type="checkbox" id="time_evening" value="夜" checked>夜
+
+<button onclick="filterData()">絞り込み</button>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
