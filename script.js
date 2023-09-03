@@ -2,23 +2,22 @@
 const map = L.map('map').setView([35.85695,139.64912], 10);  // 東京を中心に設定
 
 
+const createIcon = (iconClass, color) => {
+  return L.divIcon({
+      className: 'custom-icon',
+      html: `<i class="fas ${iconClass}" style="color:${color};"></i>`,
+      iconSize: [20, 20],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
+      iconAnchor: [10, 10],  // こちらもアイコンの大きさに応じて中心点を調整
+      popupAnchor: [0, -10]
+  });
+}
+
 const icons = {
-  morning: L.AwesomeMarkers.icon({
-      icon: 'sun',  // FontAwesome の sun アイコン
-      prefix: 'fa',
-      markerColor: 'orange'
-  }),
-  afternoon: L.AwesomeMarkers.icon({
-      icon: 'cloud-sun',  // FontAwesome の cloud-sun アイコン
-      prefix: 'fa',
-      markerColor: 'blue'
-  }),
-  evening: L.AwesomeMarkers.icon({
-      icon: 'moon',  // FontAwesome の moon アイコン
-      prefix: 'fa',
-      markerColor: 'black'
-  })
+  morning: createIcon('fa-sun', 'orange'),
+  afternoon: createIcon('fa-cloud-sun', 'blue'),
+  evening: createIcon('fa-moon', 'black')
 };
+
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
@@ -74,7 +73,9 @@ function filterData() {
           marker.on('click', function() {
               const sidebarContent = document.getElementById('sidebar-content');
               sidebarContent.innerHTML = `
-              <b>${entry.name}</b><br>${entry.city}　${entry.address}<br>${entry.days} ${entry.startTime}-${entry.endTime}
+              <b>${entry.name}</b><br>
+              ${entry.city}　${entry.address}<br>
+              ${entry.days} ${entry.startTime}-${entry.endTime}
 
               `;
           });        }
