@@ -37,8 +37,23 @@
             flex-direction: column;
         }
 
-        .button {
+        .buttonPosition {
             text-align: center;
+            margin-top: 1rem;
+        }
+
+        .button {
+            padding: 8px 20px;
+            background-color: rgb(245, 191, 79);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: rgb(225, 150, 1);
         }
 
         .mapWidth {
@@ -117,8 +132,8 @@
                 <input type="checkbox" id="time_evening" value="夜" checked>夜
             </div>
 
-            <div class="button">
-                <button onclick="filterData()">絞り込み</button>
+            <div class="buttonPosition">
+                <button class="button" onclick="filterData()">絞り込み</button>
             </div>
         </div>
         <div class="mapWidth">
