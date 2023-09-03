@@ -1,5 +1,6 @@
 
 const map = L.map('map').setView([35.85695,139.64912], 10);  // 東京を中心に設定
+map.locate({setView: true, maxZoom: 13});
 
 
 const createIcon = (iconClass, color) => {
