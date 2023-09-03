@@ -1829,9 +1829,16 @@ function filterData() {
         if (selectedTimes.includes("夜") && entryStartHour >= 16) timeMatches = true;
 
         if (dayMatches && timeMatches) {
-            L.marker([entry.lat, entry.lon]).addTo(map)
-                .bindPopup(`<b>${entry.name}</b><br>${entry.city}　${entry.address}<br>${entry.days} ${entry.startTime}-${entry.endTime}`);
-        }
+          const marker = L.marker([entry.lat, entry.lon]).addTo(map)
+
+          marker.on('click', function() {
+              const sidebarContent = document.getElementById('sidebar-content');
+              sidebarContent.innerHTML = `
+                  <b>${entry.name}</b><br>
+                  開催曜日: ${entry.days}<br>
+                  時間: ${entry.startTime}-${entry.endTime}
+              `;
+          });        }
     });
 }
 
