@@ -61,9 +61,33 @@
 
         .fas {
             font-size: 30px;
-            background-color: white;
+            /* background-color: white; */
             padding: 4px;
-            border: 1px solid black;
+            /* border: 1px solid black; */
+        }
+
+        @media (max-width: 768px) {
+            .checkbox {
+                padding: 1rem 1rem;
+            }
+
+            .mapWidth {
+                flex-direction: column;
+            }
+
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+
+            #sidebar {
+                padding: 0 0 0 0;
+                max-width: 100%;
+            }
+
+            .mapLayout {
+                justify-content: normal;
+            }
         }
 
     </style>
