@@ -12,12 +12,9 @@
         href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Monsieur+La+Doulaise&family=Noto+Sans+JP:wght@100&family=Noto+Serif+SC&family=Pinyon+Script&display=swap"
         rel="stylesheet">
     <style>
-        body {
-            background-color: rgb(224, 162, 106);
-        }
-
         .title {
             font-family: 'Kosugi Maru', sans-serif;
+            color: rgb(245, 191, 79);
             text-align: center;
         }
 
@@ -30,8 +27,23 @@
             margin: 0
         }
 
+        .checkbox {
+            border-style: dotted;
+            border-color: rgb(245, 191, 79);
+            padding: 1rem 7rem;
+            border-radius: 10px;
+            border-width: 3px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .button {
+            text-align: center;
+        }
+
         .mapWidth {
             width: 80%;
+            margin-top: 2rem;
         }
 
 
@@ -41,6 +53,7 @@
             width: 100%;
 
         }
+
     </style>
 </head>
 
@@ -48,7 +61,8 @@
 
     <h1 class="title">さいたま子ども食堂MAP</h1>
     <div class="mapLayout">
-        <div class="mapWidth">
+
+        <div class="checkbox">
             <div>
                 曜日:
                 <input type="checkbox" id="day_sun" value="日" checked>日
@@ -59,15 +73,19 @@
                 <input type="checkbox" id="day_mon" value="金" checked>金
                 <input type="checkbox" id="day_mon" value="土" checked>土
                 <!-- 以下、火水木金土も同様に追加 -->
-
+            </div>
+            <div>
                 時間:
                 <input type="checkbox" id="time_morning" value="朝" checked>朝
                 <input type="checkbox" id="time_afternoon" value="昼" checked>昼
                 <input type="checkbox" id="time_evening" value="夜" checked>夜
-
-                <button onclick="filterData()">絞り込み</button>
             </div>
 
+            <div class="button">
+                <button onclick="filterData()">絞り込み</button>
+            </div>
+        </div>
+        <div class="mapWidth">
             <div id="map"></div>
             <div id="sidebar">
                 <h3>こども食堂情報</h3>
@@ -78,7 +96,7 @@
 
     <!-- FontAwesome のスタイルシート -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-   
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="js/leaflet.awesome-markers.js"></script>
     <script src="data.js"></script>
