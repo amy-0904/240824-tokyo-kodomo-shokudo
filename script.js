@@ -69,7 +69,7 @@ function filterData() {
               icon = icons.evening;
           }
 
-          const marker = L.marker([entry.lat, entry.lon]).addTo(map)
+          const marker = L.marker([entry.lat, entry.lon], { icon: icon }).addTo(map);
 
           marker.on('click', function() {
               const sidebarContent = document.getElementById('sidebar-content');
