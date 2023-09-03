@@ -8,7 +8,7 @@ const createIcon = (iconName, color) => {
       className: 'custom-icon',
       iconUrl: "img/"+iconName+".png",
       shadowUrl: "img/shadow.png",
-      iconSize: [40, 40],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
+      iconSize: [35, 40],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
       iconAnchor: [20, 20],  // こちらもアイコンの大きさに応じて中心点を調整
       popupAnchor: [0, -10]
   });
@@ -76,7 +76,7 @@ function filterData() {
               const sidebarContent = document.getElementById('sidebar-content');
               sidebarContent.innerHTML = `
               <b>${entry.name}</b><br>
-              ${entry.city}　${entry.address}<br>
+              ${entry.address}<br>
               ${entry.days} ${entry.startTime}-${entry.endTime}
 
               `;
