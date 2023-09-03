@@ -3,10 +3,10 @@ const map = L.map('map').setView([35.85695,139.64912], 10);  // 東京を中心�
 map.locate({setView: true, maxZoom: 13});
 
 
-const createIcon = (iconClass, color) => {
+const createIcon = (iconName, color) => {
   return L.divIcon({
       className: 'custom-icon',
-      html: `<i class="fas ${iconClass}" style="color:${color};"></i>`,
+      html: `<img src="img/${iconName}.png" class="fas" style="color:${color};">`,
       iconSize: [20, 20],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
       iconAnchor: [10, 10],  // こちらもアイコンの大きさに応じて中心点を調整
       popupAnchor: [0, -10]
@@ -14,9 +14,9 @@ const createIcon = (iconClass, color) => {
 }
 
 const icons = {
-  morning: createIcon('fa-sun', 'orange'),
-  afternoon: createIcon('fa-cloud-sun', 'blue'),
-  evening: createIcon('fa-moon', 'black')
+  morning: createIcon('morning', 'orange'),
+  afternoon: createIcon('afternoon', 'blue'),
+  evening: createIcon('evening', 'black')
 };
 
 
