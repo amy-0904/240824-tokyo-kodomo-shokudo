@@ -74,9 +74,8 @@ function filterData() {
           marker.on('click', function() {
               const sidebarContent = document.getElementById('sidebar-content');
               sidebarContent.innerHTML = `
-                  <b>${entry.name}</b><br>
-                  開催曜日: ${entry.days}<br>
-                  時間: ${entry.startTime}-${entry.endTime}
+              <b>${entry.name}</b><br>${entry.city}　${entry.address}<br>${entry.days} ${entry.startTime}-${entry.endTime}
+
               `;
           });        }
     });
