@@ -4,11 +4,12 @@ map.locate({setView: true, maxZoom: 13});
 
 
 const createIcon = (iconName, color) => {
-  return L.divIcon({
+  return L.icon({
       className: 'custom-icon',
-      html: `<img src="img/${iconName}.png" class="fas" style="color:${color};">`,
-      iconSize: [20, 20],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
-      iconAnchor: [10, 10],  // こちらもアイコンの大きさに応じて中心点を調整
+      iconUrl: "img/"+iconName+".png",
+      shadowUrl: "img/shadow.png",
+      iconSize: [40, 40],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
+      iconAnchor: [20, 20],  // こちらもアイコンの大きさに応じて中心点を調整
       popupAnchor: [0, -10]
   });
 }

@@ -1,4 +1,6 @@
-// 仮のデータセット
+// 【埼玉県】子ども食堂一覧
+// https://opendata.pref.saitama.lg.jp/data/dataset/kodomoshokudou
+// から、必要項目抜き出しJSON化
 const data = [
     {
       "city": "さいたま市",
