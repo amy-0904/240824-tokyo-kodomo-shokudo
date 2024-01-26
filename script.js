@@ -87,9 +87,32 @@ function filterData() {
             marker.on('click', function () {
                 const sidebarContent = document.getElementById('sidebar-content');
                 sidebarContent.innerHTML =
-                    `<b>${entry["名称"]}</b><br>
+                    `
+                    <div class="info">
+                    <b>${entry["名称"]}</b><br>
                         ${entry["住所"]}<br>
-                        ${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}`;
+                        ${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
+                        ${entry["開催日時特記事項"]?"("+entry["開催日時特記事項"]+")":""}<br>
+                        ${entry["実施支援の主な区分"]?"実施支援："+entry["実施支援の主な区分"]:""}<br>
+                    <b>参加費</b> 
+                    <table>
+                        <tr>
+                            <th>幼児</th>
+                            <th>小学生</th>
+                            <th>中学生</th>
+                            <th>高校生</th>
+                            <th>大人</th>
+                        </tr>
+                        <tr>
+                            <td>${entry["参加費_幼児"]?entry["参加費_幼児"]+"円":"--"}</td>
+                            <td>${entry["参加費_小学生"]?entry["参加費_小学生"]+"円":"--"}</td>
+                            <td>${entry["参加費_中学生"]?entry["参加費_中学生"]+"円":"--"}</td>
+                            <td>${entry["参加費_高校生"]?entry["参加費_高校生"]+"円":"--"}</td>
+                            <td>${entry["参加費_大人"]?entry["参加費_大人"]+"円":"--"}</td>
+                        </tr>
+                    </table>
+                    ${entry["参加費特記事項"]?entry["参加費特記事項"]:""}
+                    </div>`;
             });
         }
 
