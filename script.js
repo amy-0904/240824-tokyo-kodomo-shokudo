@@ -93,19 +93,15 @@ function filterData() {
                 sidebarContent.innerHTML =
                     `
                     <div class="info">
-                    <b>${entry["名称"]}</b><br>
-                        ${entry["住所"]}<br>
-                        ${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
-                        ${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : ""}<br>
-                        ${entry["実施支援の主な区分"] ? "実施支援：" + entry["実施支援の主な区分"] : ""}<br>
-                    <b>参加費</b> 
+                    <h4>${entry["名称"]}</h4>
+                        <p>${entry["住所"]}</p>
+                        <p>${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
+                        ${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : ""}</p>
+                        <p>${entry["実施支援の主な区分"] ? "実施支援：" + entry["実施支援の主な区分"] : ""}</p>
+                    <h4>参加費</h4> 
                     <table>
                         <tr>
-                            <th>幼児</th>
-                            <th>小学生</th>
-                            <th>中学生</th>
-                            <th>高校生</th>
-                            <th>大人</th>
+                            <th>幼児</th><th>小学生</th><th>中学生</th><th>高校生</th><th>大人</th>
                         </tr>
                         <tr>
                             <td>${entry["参加費_幼児"] ? entry["参加費_幼児"] + "円" : "--"}</td>
@@ -115,7 +111,7 @@ function filterData() {
                             <td>${entry["参加費_大人"] ? entry["参加費_大人"] + "円" : "--"}</td>
                         </tr>
                     </table>
-                    ${entry["参加費特記事項"] ? entry["参加費特記事項"] : ""}
+                    <small>${entry["参加費特記事項"] ? "※"+entry["参加費特記事項"] : ""}</small>
                     </div>`;
             });
             markers.addLayer(marker);
