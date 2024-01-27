@@ -58,6 +58,9 @@ function filterData() {
             map.removeLayer(layer);
         }
     });
+
+    const markers = L.markerClusterGroup();
+
     data.forEach((entry) => {
         // 以下の要素がない行はスキップ
         if (!entry["開催曜日"] || !entry["開催開始時間"] || !entry["開催終了時間"] || !entry["経度"] || !entry["緯度"]) return;
@@ -82,7 +85,7 @@ function filterData() {
             } else {
                 icon = icons.evening;
             }
-            const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon }).addTo(map);
+            const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon });
 
             marker.on('click', function () {
                 const sidebarContent = document.getElementById('sidebar-content');
@@ -114,7 +117,9 @@ function filterData() {
                     ${entry["参加費特記事項"] ? entry["参加費特記事項"] : ""}
                     </div>`;
             });
+            markers.addLayer(marker);
         }
 
     });
+    map.addLayer(markers);
 }
