@@ -21,6 +21,7 @@ const icons = {
 
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
 }).addTo(map);
 
