@@ -26,7 +26,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // データをcsvから読む
 let data;
-Papa.parse('./xlsx.csv', {
+const csvFileName = "kodomo-shokudo.csv"
+Papa.parse(csvFileName, {
     download: true,
     dynamicTyping: true,
 
@@ -68,20 +69,19 @@ function filterData() {
         const entryEndHour = parseInt(entry["開催終了時間"].split(":")[0]);
 
         if (selectedTimes.includes("朝") && entryStartHour < 12) timeMatches = true;
-        if (selectedTimes.includes("昼") && entryStartHour >= 12 && entryEndHour < 16) timeMatches = true;
-        if (selectedTimes.includes("夜") && entryStartHour >= 16) timeMatches = true;
+        if (selectedTimes.includes("昼") && entryStartHour >= 12 && entryStartHour < 18) timeMatches = true;
+        if (selectedTimes.includes("夜") && entryStartHour >= 18) timeMatches = true;
 
         if (dayMatches && timeMatches) {
 
             let icon;
             if (entryStartHour < 12) {
                 icon = icons.morning;
-            } else if (entryStartHour >= 12 && entryEndHour < 18) {
+            } else if (entryStartHour >= 12 && entryStartHour < 18) {
                 icon = icons.afternoon;
             } else {
                 icon = icons.evening;
             }
-
             const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon }).addTo(map);
 
             marker.on('click', function () {
@@ -92,8 +92,8 @@ function filterData() {
                     <b>${entry["名称"]}</b><br>
                         ${entry["住所"]}<br>
                         ${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
-                        ${entry["開催日時特記事項"]?"("+entry["開催日時特記事項"]+")":""}<br>
-                        ${entry["実施支援の主な区分"]?"実施支援："+entry["実施支援の主な区分"]:""}<br>
+                        ${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : ""}<br>
+                        ${entry["実施支援の主な区分"] ? "実施支援：" + entry["実施支援の主な区分"] : ""}<br>
                     <b>参加費</b> 
                     <table>
                         <tr>
@@ -104,14 +104,14 @@ function filterData() {
                             <th>大人</th>
                         </tr>
                         <tr>
-                            <td>${entry["参加費_幼児"]?entry["参加費_幼児"]+"円":"--"}</td>
-                            <td>${entry["参加費_小学生"]?entry["参加費_小学生"]+"円":"--"}</td>
-                            <td>${entry["参加費_中学生"]?entry["参加費_中学生"]+"円":"--"}</td>
-                            <td>${entry["参加費_高校生"]?entry["参加費_高校生"]+"円":"--"}</td>
-                            <td>${entry["参加費_大人"]?entry["参加費_大人"]+"円":"--"}</td>
+                            <td>${entry["参加費_幼児"] ? entry["参加費_幼児"] + "円" : "--"}</td>
+                            <td>${entry["参加費_小学生"] ? entry["参加費_小学生"] + "円" : "--"}</td>
+                            <td>${entry["参加費_中学生"] ? entry["参加費_中学生"] + "円" : "--"}</td>
+                            <td>${entry["参加費_高校生"] ? entry["参加費_高校生"] + "円" : "--"}</td>
+                            <td>${entry["参加費_大人"] ? entry["参加費_大人"] + "円" : "--"}</td>
                         </tr>
                     </table>
-                    ${entry["参加費特記事項"]?entry["参加費特記事項"]:""}
+                    ${entry["参加費特記事項"] ? entry["参加費特記事項"] : ""}
                     </div>`;
             });
         }
