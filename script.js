@@ -64,7 +64,7 @@ function filterData() {
 
     data.forEach((entry) => {
         // 以下の要素がない行はスキップ
-        if (!entry["開催曜日"] || !entry["開催開始時間"] || !entry["開催終了時間"] || !entry["経度"] || !entry["緯度"]) return;
+        if (!entry["経度"] || !entry["緯度"]) return;
 
 
             let icon;
