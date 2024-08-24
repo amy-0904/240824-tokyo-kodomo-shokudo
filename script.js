@@ -64,28 +64,11 @@ function filterData() {
 
     data.forEach((entry) => {
         // 以下の要素がない行はスキップ
-        if (!entry["開催曜日"] || !entry["開催開始時間"] || !entry["開催終了時間"] || !entry["経度"] || !entry["緯度"]) return;
+        if (!entry["経度"] || !entry["緯度"]) return;
 
-        let dayMatches = selectedDays.some(day => entry["開催曜日"].includes(day));
-        let timeMatches = false;
-
-        const entryStartHour = parseInt(entry["開催開始時間"].split(":")[0]);
-        const entryEndHour = parseInt(entry["開催終了時間"].split(":")[0]);
-
-        if (selectedTimes.includes("朝") && entryStartHour < 12) timeMatches = true;
-        if (selectedTimes.includes("昼") && entryStartHour >= 12 && entryStartHour < 18) timeMatches = true;
-        if (selectedTimes.includes("夜") && entryStartHour >= 18) timeMatches = true;
-
-        if (dayMatches && timeMatches) {
 
             let icon;
-            if (entryStartHour < 12) {
                 icon = icons.morning;
-            } else if (entryStartHour >= 12 && entryStartHour < 18) {
-                icon = icons.afternoon;
-            } else {
-                icon = icons.evening;
-            }
             const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon });
 
             marker.on('click', function () {
@@ -93,12 +76,21 @@ function filterData() {
                 sidebarContent.innerHTML =
                     `
                     <div class="info">
-                    <h4>${entry["名称"]}</h4>
+                    <h4>${entry["名称"]}　${entry["名称_カナ"]}</h4>
+
                         <p>${entry["住所"]}</p>
+                        <p>${entry["方書"]}</p>
+                        <p>${entry["URL"]}</p>
+                        <p>${entry["運営団体名"]}</p>
+                        <p>${entry["開催頻度"]}</p>
+                        
                         <p>${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
                         ${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : ""}</p>
                         <p>${entry["実施支援の主な区分"] ? "実施支援：" + entry["実施支援の主な区分"] : ""}</p>
                     <h4>参加費</h4> 
+                    
+                                            <p>${entry["参加条件"]}</p>
+
                     <table>
                         <tr>
                             <th>幼児</th><th>小学生</th><th>中学生</th><th>高校生</th><th>大人</th>
@@ -112,10 +104,22 @@ function filterData() {
                         </tr>
                     </table>
                     <small>${entry["参加費特記事項"] ? "※"+entry["参加費特記事項"] : ""}</small>
+
+                                           
+                    
+                    
+                        <p>${entry["予約方法"]? "予約方法："+entry["予約方法"]: ""}</p>
+                        <p>${entry["予約特記事項"]? entry["予約特記事項"]: ""}</p>
+                        <p>${entry["定員"]? entry["定員"]: ""}</p>
+                        <p>${entry["フードパントリー実施"]? entry["フードパントリー実施"]: ""}</p>  
+                        <p>${entry["テイクアウト実施"]? entry["テイクアウト実施"]: ""}</p>
+                        <p>${entry["学区"]? entry["学区"]: ""}</p>
+                        <p>${entry["ネットワークの加入"]? entry["ネットワークの加入"]: ""}</p>
+                        <div>${entry["画像"]? "<img src='"+entry["画像"]+"'>": ""}</div>
+
                     </div>`;
             });
             markers.addLayer(marker);
-        }
 
     });
     map.addLayer(markers);
