@@ -66,26 +66,9 @@ function filterData() {
         // 以下の要素がない行はスキップ
         if (!entry["開催曜日"] || !entry["開催開始時間"] || !entry["開催終了時間"] || !entry["経度"] || !entry["緯度"]) return;
 
-        let dayMatches = selectedDays.some(day => entry["開催曜日"].includes(day));
-        let timeMatches = false;
-
-        const entryStartHour = parseInt(entry["開催開始時間"].split(":")[0]);
-        const entryEndHour = parseInt(entry["開催終了時間"].split(":")[0]);
-
-        if (selectedTimes.includes("朝") && entryStartHour < 12) timeMatches = true;
-        if (selectedTimes.includes("昼") && entryStartHour >= 12 && entryStartHour < 18) timeMatches = true;
-        if (selectedTimes.includes("夜") && entryStartHour >= 18) timeMatches = true;
-
-        if (dayMatches && timeMatches) {
 
             let icon;
-            if (entryStartHour < 12) {
                 icon = icons.morning;
-            } else if (entryStartHour >= 12 && entryStartHour < 18) {
-                icon = icons.afternoon;
-            } else {
-                icon = icons.evening;
-            }
             const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon });
 
             marker.on('click', function () {
@@ -115,7 +98,6 @@ function filterData() {
                     </div>`;
             });
             markers.addLayer(marker);
-        }
 
     });
     map.addLayer(markers);
