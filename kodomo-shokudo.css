@@ -1,15 +1,66 @@
+/* HTML全体を設定 */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #9fcffa;
+  }
+  
+  /* コンテンツエリアを設定 */
+  .wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* メインコンテンツ */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* フッターを固定 */
+  footer {
+    background-color: #9fcffa;
+    padding: 4px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: serif;
+    color: #222233;
+    font-size: 80%;
+    border-top: aliceblue 1px solid;
+
+  }
+  
+
+.title-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
 .title {
     font-family: 'Kosugi Maru', sans-serif;
     color: rgb(245, 191, 79);
     text-align: center;
 }
 
+.title-icon{
+    width: 80px;
+}
+
+.title-text{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
 .mapLayout {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    margin: 0
+    margin: 0;
 }
 
 .checkbox {
@@ -54,7 +105,8 @@
 
 #sidebar {
     padding: 0 8px;
-    max-width: 25%;
+    width: 25%;
+    background-color: aliceblue;
 }
 
 #sidebar p {
@@ -113,6 +165,7 @@ td {
     #sidebar {
         padding: 0 0 0 0;
         max-width: 100%;
+        width:100%;
     }
 
     .mapLayout {

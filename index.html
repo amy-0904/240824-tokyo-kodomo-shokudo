@@ -18,14 +18,25 @@
 </head>
 
 <body>
-    <h1 class="title">とうきょう<br>こども食堂マップ</h1>
-    <div class="mapLayout">
-        <div class="mapWidth">
-            <div id="map"></div>
-            <div id="sidebar">
-                <div id="sidebar-content"></div>
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="title-box">
+                <img src="img/Pin_child.svg" alt="こども食堂アイコン" class="title-icon">
+                <h1 class="title">とうきょう<br>こども食堂マップ</h1>
             </div>
+            <div class="mapLayout">
+                <div class="mapWidth">
+                    <div id="map"></div>
+                    <div id="sidebar">
+                        <div id="sidebar-content"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <footer>
+            とうきょうこども食堂マップ 都知事杯ハッカソン2024 Amy & otkzh
+        </footer>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="js/papaparse.min.js"></script>
