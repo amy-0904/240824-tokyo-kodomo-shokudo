@@ -83,7 +83,15 @@ td {
     width:100%;
 
 }
+.info .tag {
+    font-size: 80%;
+    border: solid 1px black;
+    color: white;
+    background-color: blue;
+    padding: 4px;
+}
 
+}
 .info table {
     font-size: 80%;
 }
