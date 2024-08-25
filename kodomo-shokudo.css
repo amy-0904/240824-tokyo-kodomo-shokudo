@@ -1,7 +1,22 @@
+body{
+    background-color: #9fcffa;
+}
+.title-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: white;
+}
+
 .title {
     font-family: 'Kosugi Maru', sans-serif;
     color: rgb(245, 191, 79);
     text-align: center;
+}
+
+.title-icon{
+    width: 80px;
 }
 
 .mapLayout {
