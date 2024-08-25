@@ -1,4 +1,4 @@
-const map = L.map('map').setView([35.85695, 139.64912], 10);  // 東京を中心に設定
+const map = L.map('map').setView([35.689501375244, 139.69173371705], 10);  // 都庁を中心に設定
 map.locate({ setView: true, maxZoom: 13 });
 
 
@@ -19,20 +19,43 @@ const icons = {
     evening: createIcon('evening', 'black'),
     child: L.icon({
         className: 'custom-icon',
-        iconUrl: "img/Pin.png",
+        iconUrl: "img/Pin.svg",
         shadowUrl: "img/shadow.png",
-        iconSize: [50, 60],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
-        iconAnchor: [25, 30],  // こちらもアイコンの大きさに応じて中心点を調整
+        iconSize: [50, 50],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
+        iconAnchor: [25, 50],  // こちらもアイコンの大きさに応じて中心点を調整
         popupAnchor: [0, -10]
     }),
 
 };
 
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+// タイルレイヤーの作成
+
+
+const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
-}).addTo(map);
+});
+
+const osmjp = L.tileLayer('https://{s}.tile.openstreetmap.jp/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+});
+
+
+
+// 地図にデフォルトのレイヤーを追加（ここではMIERUNE MONO）
+osm.addTo(map);
+
+// レイヤー切り替えコントロール
+const baseMaps = {
+    "OpenStreetMap": osm,
+    "OpenStreetMap Japan": osmjp
+
+};
+
+// レイヤーコントロールの追加
+L.control.layers(baseMaps).addTo(map);
 
 // データをcsvから読む
 let data;
