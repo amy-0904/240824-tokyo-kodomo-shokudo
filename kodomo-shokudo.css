@@ -19,12 +19,17 @@ html, body {
   
   /* フッターを固定 */
   footer {
-    background-color: #f8f8f8;
-    padding: 10px;
+    background-color: #9fcffa;
+    padding: 4px;
     text-align: center;
     position: relative;
     bottom: 0;
     width: 100%;
+    font-family: serif;
+    color: #222233;
+    font-size: 80%;
+    border-top: aliceblue 1px solid;
+
   }
   
 
@@ -32,7 +37,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
     background-color: white;
 }
 
@@ -56,8 +60,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* min-height: 100vh; */
-    margin: 0
+    margin: 0;
 }
 
 .checkbox {
@@ -102,7 +105,8 @@ html, body {
 
 #sidebar {
     padding: 0 8px;
-    max-width: 25%;
+    width: 25%;
+    background-color: aliceblue;
 }
 
 #sidebar p {
@@ -161,6 +165,7 @@ td {
     #sidebar {
         padding: 0 0 0 0;
         max-width: 100%;
+        width:100%;
     }
 
     .mapLayout {
