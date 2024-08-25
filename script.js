@@ -42,6 +42,10 @@ const osmjp = L.tileLayer('https://{s}.tile.openstreetmap.jp/{z}/{x}/{y}.png', {
     maxZoom: 19
 });
 
+const gsimaps = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.gsi.go.jp/">国土地理院</a>',
+    maxZoom: 19
+})
 
 
 // 地図にデフォルトのレイヤーを追加（ここではMIERUNE MONO）
@@ -50,7 +54,8 @@ osm.addTo(map);
 // レイヤー切り替えコントロール
 const baseMaps = {
     "OpenStreetMap": osm,
-    "OpenStreetMap Japan": osmjp
+    "OpenStreetMap Japan": osmjp,
+    "地理院地図": gsimaps,
 
 };
 
