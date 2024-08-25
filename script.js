@@ -16,7 +16,16 @@ const createIcon = (iconName, color) => {
 const icons = {
     morning: createIcon('morning', 'orange'),
     afternoon: createIcon('afternoon', 'blue'),
-    evening: createIcon('evening', 'black')
+    evening: createIcon('evening', 'black'),
+    child: L.icon({
+        className: 'custom-icon',
+        iconUrl: "img/Pin.png",
+        shadowUrl: "img/shadow.png",
+        iconSize: [50, 60],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
+        iconAnchor: [25, 30],  // こちらもアイコンの大きさに応じて中心点を調整
+        popupAnchor: [0, -10]
+    }),
+
 };
 
 
@@ -67,59 +76,54 @@ function filterData() {
         if (!entry["経度"] || !entry["緯度"]) return;
 
 
-            let icon;
-                icon = icons.morning;
-            const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon });
+        let icon;
+        icon = icons.child;
+        const marker = L.marker([entry["緯度"], entry["経度"]], { icon: icon });
 
-            marker.on('click', function () {
-                const sidebarContent = document.getElementById('sidebar-content');
-                sidebarContent.innerHTML =
-                    `
+        marker.on('click', function () {
+            const sidebarContent = document.getElementById('sidebar-content');
+            sidebarContent.innerHTML =
+                `
                     <div class="info">
-                    <h4>${entry["名称"]}　${entry["名称_カナ"]}</h4>
+                    <h4>${entry["名称"]}（${entry["名称_カナ"]}）</h4>
+                        <div>${entry["画像"] ? "<img src='" + entry["画像"] + "'>" : ""}</div>
 
-                        <p>${entry["住所"]}</p>
-                        <p>${entry["方書"]}</p>
-                        <p>${entry["URL"]}</p>
-                        <p>${entry["運営団体名"]}</p>
-                        <p>${entry["開催頻度"]}</p>
+                        <p>住所：${entry["住所"] ? entry["住所"] : "記載なし"}　${entry["方書"] ? entry["方書"] : ""}</p>
+                        <p>URL：${entry["URL"] ? entry["URL"] : "記載なし"}</p>
+                        <p>運営団体名：${entry["運営団体名"] ? entry["運営団体名"] : "記載なし"}</p>
+                        <p>開催頻度：${entry["開催頻度"] ? entry["開催頻度"] : "記載なし"}</p>
                         
-                        <p>${entry["開催曜日"]} ${entry["開催開始時間"]}-${entry["開催終了時間"]}
-                        ${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : ""}</p>
-                        <p>${entry["実施支援の主な区分"] ? "実施支援：" + entry["実施支援の主な区分"] : ""}</p>
+                        <p>開催曜日：${entry["開催曜日"] ? entry["開催曜日"] : "記載なし"}</p>
+                        <p>開催時間：${entry["開催開始時間"] ? entry["開催開始時間"] : ""}〜${entry["開催終了時間"] ? entry["開催終了時間"] : ""}</p>
+                        <p>${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : "記載なし"}</p>
+                        <p>実施支援の主な区分：${entry["実施支援の主な区分"] ? entry["実施支援の主な区分"] : "記載なし"}</p>
+
+                        <p>予約方法：${entry["予約方法"] ? entry["予約方法"] : "記載なし"}</p>
+                        <p>予約特記事項：${entry["予約特記事項"] ? entry["予約特記事項"] : "記載なし"}</p>
+                        <p>定員：${entry["定員"] ? entry["定員"] : "記載なし"}</p>
+                        <p>フードパントリー実施：${entry["フードパントリー実施"] ? entry["フードパントリー実施"] : "記載なし"}</p>  
+                        <p>テイクアウト実施：${entry["テイクアウト実施"] ? entry["テイクアウト実施"] : "記載なし"}</p>
+                        <p>学区：${entry["学区"] ? entry["学区"] : "記載なし"}</p>
+                        <p>ネットワークの加入：${entry["ネットワークの加入"] ? entry["ネットワークの加入"] : "記載なし"}</p>
+                        <p>参加条件：${entry["参加条件"] ? entry["参加条件"] : "記載なし"}</p>
+
                     <h4>参加費</h4> 
-                    
-                                            <p>${entry["参加条件"]}</p>
-
-                    <table>
-                        <tr>
-                            <th>幼児</th><th>小学生</th><th>中学生</th><th>高校生</th><th>大人</th>
-                        </tr>
-                        <tr>
-                            <td>${entry["参加費_幼児"] ? entry["参加費_幼児"] + "円" : "--"}</td>
-                            <td>${entry["参加費_小学生"] ? entry["参加費_小学生"] + "円" : "--"}</td>
-                            <td>${entry["参加費_中学生"] ? entry["参加費_中学生"] + "円" : "--"}</td>
-                            <td>${entry["参加費_高校生"] ? entry["参加費_高校生"] + "円" : "--"}</td>
-                            <td>${entry["参加費_大人"] ? entry["参加費_大人"] + "円" : "--"}</td>
-                        </tr>
-                    </table>
-                    <small>${entry["参加費特記事項"] ? "※"+entry["参加費特記事項"] : ""}</small>
-
-                                           
-                    
-                    
-                        <p>${entry["予約方法"]? "予約方法："+entry["予約方法"]: ""}</p>
-                        <p>${entry["予約特記事項"]? entry["予約特記事項"]: ""}</p>
-                        <p>${entry["定員"]? entry["定員"]: ""}</p>
-                        <p>${entry["フードパントリー実施"]? entry["フードパントリー実施"]: ""}</p>  
-                        <p>${entry["テイクアウト実施"]? entry["テイクアウト実施"]: ""}</p>
-                        <p>${entry["学区"]? entry["学区"]: ""}</p>
-                        <p>${entry["ネットワークの加入"]? entry["ネットワークの加入"]: ""}</p>
-                        <div>${entry["画像"]? "<img src='"+entry["画像"]+"'>": ""}</div>
-
+                        <table>
+                            <tr>
+                                <th>幼児</th><th>小学生</th><th>中学生</th><th>高校生</th><th>大人</th>
+                            </tr>
+                            <tr>
+                                <td>${entry["参加費_幼児"] ? entry["参加費_幼児"] + "円" : "--"}</td>
+                                <td>${entry["参加費_小学生"] ? entry["参加費_小学生"] + "円" : "--"}</td>
+                                <td>${entry["参加費_中学生"] ? entry["参加費_中学生"] + "円" : "--"}</td>
+                                <td>${entry["参加費_高校生"] ? entry["参加費_高校生"] + "円" : "--"}</td>
+                                <td>${entry["参加費_大人"] ? entry["参加費_大人"] + "円" : "--"}</td>
+                            </tr>
+                        </table>
+                    <small>${entry["参加費特記事項"] ? "※" + entry["参加費特記事項"] : ""}</small>
                     </div>`;
-            });
-            markers.addLayer(marker);
+        });
+        markers.addLayer(marker);
 
     });
     map.addLayer(markers);
