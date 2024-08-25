@@ -58,8 +58,14 @@
 }
 
 #sidebar p {
-    line-height: 8px;
+    /* line-height: 8px; */
+    margin:0;
     font-size: 80%;
+}
+
+.info-photo{
+    width:100%;
+    max-width: 300px;
 }
 
 table {
@@ -74,6 +80,7 @@ td {
 .info {
     background-color: aliceblue;
     padding: 4px;
+    width:100%;
 
 }
 

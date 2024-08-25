@@ -109,7 +109,7 @@ function filterData() {
                 `
                     <div class="info">
                     <h4>${entry["名称"]}（${entry["名称_カナ"]}）</h4>
-                        <div>${entry["画像"] ? "<img src='" + entry["画像"] + "'>" : ""}</div>
+                        <div>${entry["画像"] ? "<img  class='info-photo' src='" + entry["画像"] + "'>" : ""}</div>
 
                         <p>住所：${entry["住所"] ? entry["住所"] : "記載なし"}　${entry["方書"] ? entry["方書"] : ""}</p>
                         <p>URL：${entry["URL"] ? entry["URL"] : "記載なし"}</p>
