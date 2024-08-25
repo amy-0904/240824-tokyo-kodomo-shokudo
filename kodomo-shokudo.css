@@ -56,15 +56,18 @@
     padding: 0 8px;
     max-width: 25%;
 }
+
 #sidebar p {
     line-height: 8px;
     font-size: 80%;
 }
 
 table {
-    border-collapse:  collapse;
+    border-collapse: collapse;
 }
-th,td {
+
+th,
+td {
     border: solid 1px;
 }
 
@@ -73,6 +76,7 @@ th,td {
     padding: 4px;
 
 }
+
 .info table {
     font-size: 80%;
 }
@@ -100,4 +104,3 @@ th,td {
         justify-content: normal;
     }
 }
-
