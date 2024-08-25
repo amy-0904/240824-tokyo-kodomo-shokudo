@@ -1,6 +1,33 @@
-body{
+/* HTML全体を設定 */
+html, body {
+    height: 100%;
+    margin: 0;
     background-color: #9fcffa;
-}
+  }
+  
+  /* コンテンツエリアを設定 */
+  .wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* メインコンテンツ */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* フッターを固定 */
+  footer {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+
 .title-box{
     display: flex;
     justify-content: center;
@@ -19,11 +46,17 @@ body{
     width: 80px;
 }
 
+.title-text{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
 .mapLayout {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 0
 }
 
