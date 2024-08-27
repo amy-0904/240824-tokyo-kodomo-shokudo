@@ -110,7 +110,6 @@ function filterData() {
 
         marker.on('click', function () {
             const sidebarContent = document.getElementById('sidebar-content');
-            console.log(entry);
             sidebarContent.innerHTML =
                 `
                     <div class="info">
