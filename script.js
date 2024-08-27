@@ -1,22 +1,9 @@
+// map基本設定
 const map = L.map('map').setView([35.689501375244, 139.69173371705], 10);  // 都庁を中心に設定
 map.locate({ setView: true, maxZoom: 13 });
 
-
-const createIcon = (iconName, color) => {
-    return L.icon({
-        className: 'custom-icon',
-        iconUrl: "img/" + iconName + ".png",
-        shadowUrl: "img/shadow.png",
-        iconSize: [35, 40],  // これはアイコンの大きさに応じて調整する必要があるかもしれません
-        iconAnchor: [20, 20],  // こちらもアイコンの大きさに応じて中心点を調整
-        popupAnchor: [0, -10]
-    });
-}
-
+// アイコン設定
 const icons = {
-    morning: createIcon('morning', 'orange'),
-    afternoon: createIcon('afternoon', 'blue'),
-    evening: createIcon('evening', 'black'),
     child: L.icon({
         className: 'custom-icon',
         iconUrl: "img/Pin.svg",
@@ -28,10 +15,7 @@ const icons = {
 
 };
 
-
 // タイルレイヤーの作成
-
-
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
@@ -48,7 +32,7 @@ const gsimaps = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y
 })
 
 
-// 地図にデフォルトのレイヤーを追加（ここではMIERUNE MONO）
+// 地図にデフォルトのレイヤーを追加（ここではosm）
 osm.addTo(map);
 
 // レイヤー切り替えコントロール
@@ -72,24 +56,12 @@ Papa.parse(csvFileName, {
     header: true,
     complete: function (results) {
         data = results.data;
-        // console.log(data);
         filterData();
 
     }
 });
 
 function filterData() {
-    const selectedDays = [];
-    const selectedTimes = [];
-
-    document.querySelectorAll('input[type="checkbox"]:checked').forEach((checkbox) => {
-        if (['日', '月', '火', '水', '木', '金', '土'].includes(checkbox.value)) {
-            selectedDays.push(checkbox.value);
-        } else {
-            selectedTimes.push(checkbox.value);
-        }
-    });
-
     // マーカーを一旦削除
     map.eachLayer((layer) => {
         if (layer instanceof L.Marker) {
@@ -97,7 +69,7 @@ function filterData() {
         }
     });
 
-    const markers = L.markerClusterGroup();
+    const markers = L.markerClusterGroup( {disableClusteringAtZoom: 14} );
 
     data.forEach((entry) => {
         // 以下の要素がない行はスキップ
@@ -114,34 +86,29 @@ function filterData() {
                 `
                     <div class="info">
                     <h4>${entry["名称"]}（${entry["名称_カナ"]}）</h4>
-                        <div>${entry["画像"] ? "<img  class='info-photo' src='" + entry["画像"] + "'>" : ""}</div>
+                    <div>${entry["画像"] ? "<img  class='info-photo' src='" + entry["画像"] + "'>" : ""}</div>
+                    <p>住所：${entry["住所"] ? entry["住所"] : "記載なし"}　${entry["方書"] ? entry["方書"] : ""}</p>
+                    <p>URL：${entry["URL"] ? "<a href='" + entry["URL"] + "'>" + entry["URL"] + "</a>" : "記載なし"}</p>
+                    <p>運営団体名：${entry["運営団体名"] ? entry["運営団体名"] : "記載なし"}</p>
+                    <hr>
 
-                        <p>住所：${entry["住所"] ? entry["住所"] : "記載なし"}　${entry["方書"] ? entry["方書"] : ""}</p>
-                        <p>URL：${entry["URL"] ? "<a href='" + entry["URL"] + "'>" + entry["URL"] + "</a>" : "記載なし"}</p>
-                        <p>運営団体名：${entry["運営団体名"] ? entry["運営団体名"] : "記載なし"}</p>
+                    <p>開催頻度：${getFrequency(entry["開催頻度"])}</p>
+                    <p>開催曜日：${entry["開催曜日"] ? entry["開催曜日"] : "記載なし"}</p>
+                    <p>開催時間：${entry["開催開始時間"] ? entry["開催開始時間"] : ""}〜${entry["開催終了時間"] ? entry["開催終了時間"] : ""}</p>
+                    <p>開催日時特記事項：${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : "記載なし"}</p>
+                    <hr>
 
-                        <hr>
+                    <p>実施支援の主な区分：${entry["実施支援の主な区分"] ? entry["実施支援の主な区分"] : "記載なし"}</p>
+                    <p>予約方法：${entry["予約方法"] ? entry["予約方法"] : "記載なし"}</p>
+                    <p>予約特記事項：${entry["予約特記事項"] ? entry["予約特記事項"] : "記載なし"}</p>
+                    <p>定員：${entry["定員"] ? entry["定員"] : "記載なし"}</p>
+                    <p>学区：${entry["学区"] ? entry["学区"] : "記載なし"}</p>
+                    <p>ネットワークの加入：${entry["ネットワークの加入"] ? entry["ネットワークの加入"] : "記載なし"}</p>
+                    <p>参加条件：${entry["参加条件"] ? entry["参加条件"] : "記載なし"}</p>
+                    ${entry["フードパントリー実施"] == "1" ? "<span class=\"tag\">フードパントリー実施</span>" : ""}  
+                    ${entry["テイクアウト実施"] == "1" ? "<span class=\"tag\">テイクアウト実施</span>" : ""}  
+                    <hr>
 
-                        <p>開催頻度：${getFrequency(entry["開催頻度"])}</p>
-                        
-                        <p>開催曜日：${entry["開催曜日"] ? entry["開催曜日"] : "記載なし"}</p>
-                        <p>開催時間：${entry["開催開始時間"] ? entry["開催開始時間"] : ""}〜${entry["開催終了時間"] ? entry["開催終了時間"] : ""}</p>
-                        <p>開催日時特記事項：${entry["開催日時特記事項"] ? "(" + entry["開催日時特記事項"] + ")" : "記載なし"}</p>
-                        <hr>
-                        <p>実施支援の主な区分：${entry["実施支援の主な区分"] ? entry["実施支援の主な区分"] : "記載なし"}</p>
-
-                        <p>予約方法：${entry["予約方法"] ? entry["予約方法"] : "記載なし"}</p>
-                        <p>予約特記事項：${entry["予約特記事項"] ? entry["予約特記事項"] : "記載なし"}</p>
-                        <p>定員：${entry["定員"] ? entry["定員"] : "記載なし"}</p>
-                        <p>学区：${entry["学区"] ? entry["学区"] : "記載なし"}</p>
-                        <p>ネットワークの加入：${entry["ネットワークの加入"] ? entry["ネットワークの加入"] : "記載なし"}</p>
-                        <p>参加条件：${entry["参加条件"] ? entry["参加条件"] : "記載なし"}</p>
-
-
-                        ${entry["フードパントリー実施"] == "1" ? "<span class=\"tag\">フードパントリー実施</span>" : ""}  
-                        ${entry["テイクアウト実施"] == "1" ? "<span class=\"tag\">テイクアウト実施</span>" : ""}  
-
-<hr>
                     <h4>参加費</h4> 
                         <table>
                             <tr>
@@ -163,18 +130,6 @@ function filterData() {
     });
     map.addLayer(markers);
 }
-
-/**
- * “こども食堂の開催頻度について、下記の1〜8から番号を選び記載。
-1. ほぼ毎日(週5〜7回程度)
-2. 週3〜4回程度
-3. 週1〜2回程度
-4. 2週間に1回程度
-5. 月1回程度
-6. 数か月に1回程度
-7. 季節限定(長期休暇中のみなど)
-8. 不定期”
- */
 
 // 開催頻度をパラメータとして、文字列を返す関数
 function getFrequency(frequency) {
