@@ -7,7 +7,7 @@ html, body {
   
   /* コンテンツエリアを設定 */
   .wrapper {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -20,10 +20,8 @@ html, body {
   /* フッターを固定 */
   footer {
     background-color: #9fcffa;
-    padding: 4px;
+    padding: 0;
     text-align: center;
-    position: relative;
-    bottom: 0;
     width: 100%;
     font-family: serif;
     color: #222233;
@@ -61,6 +59,10 @@ html, body {
     flex-direction: column;
     align-items: center;
     margin: 0;
+}
+
+.mapWidth{
+    margin-top:0 !important;
 }
 
 .checkbox {
@@ -143,7 +145,6 @@ td {
     padding: 4px;
 }
 
-}
 .info table {
     font-size: 80%;
 }
